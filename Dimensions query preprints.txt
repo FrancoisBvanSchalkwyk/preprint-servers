@@ -1,0 +1,25 @@
+SELECT a.[pub_id]
+      ,[author_first]
+      ,[author_et_al]
+      ,[organization_first]
+      ,[organization_et_al]
+      ,[title]
+      ,[source]
+      ,[pub_year]
+      ,[volume]
+      ,[issue]
+      ,[pages]
+      ,[doi]
+      ,[pmid]
+      ,[pub_type]
+      ,[n_cits]
+      ,[n_self_cits]
+         ,c.organization_name
+         ,c.country_code
+  FROM [dimensions_2022jun].[dbo].[pub_detail] a
+  left join [dimensions_2022jun].[dbo].[pub_affiliation_organization] b on a.pub_id=b.pub_id
+  left join [dimensions_2022jun].[dbo].[organization] c on b.grid_id=c.grid_id
+  where doi like '10.31730/osf.io%' -- We think this is the DOI from OSF mostly used by Africarxiv
+  or [source] = 'AfricArXiv' 
+
+

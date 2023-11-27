@@ -1,0 +1,9 @@
+SELECT 
+       a.[doi] 
+	   ,[altmetric_id]
+	   ,b.[news]
+	   ,[twitter]
+	   FROM [altmetric_2022may].[dbo].[pub_citation] a
+  join [altmetric_2022may].[dbo].[pub_counts] b on a.record_id=b.record_id
+  where doi like '10.31219/osf.io/%'
+
